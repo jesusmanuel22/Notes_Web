@@ -26,14 +26,15 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    respond_to do |format|
+    user = User.find_by(name: user_params[:name])
+    if user == nil
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        redirect_to login_url, :notice => "Signed up!"
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render :new
       end
+    else
+      redirect_to signup_url, :notice => "ERROR username already exits!"
     end
   end
 
@@ -54,11 +55,14 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @user=User.find_by name: session[:user]
+    #@notes = Note.where('user_id LIKE ?', "#{@user.id}")
+    #@notes.each do |note|
+     # note.destroy
+    #end
+    User.find(params[:id]).destroy
+    redirect_to "/logout", :notice => "The user was successfully destroyed."
+    
   end
 
   private
