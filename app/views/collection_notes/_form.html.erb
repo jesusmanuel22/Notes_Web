@@ -1,0 +1,27 @@
+<%= form_with(model: collection_note, local: true) do |form| %>
+  <% if collection_note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(collection_note.errors.count, "error") %> prohibited this collection_note from being saved:</h2>
+
+      <ul>
+      <% collection_note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :id_collection %>
+    <%= form.number_field :id_collection, id: :collection_note_id_collection %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id_note %>
+    <%= form.number_field :id_note, id: :collection_note_id_note %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

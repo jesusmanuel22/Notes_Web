@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Friendship Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sender</th>
+      <th>Receiver</th>
+      <th>Text</th>
+      <th>Expiration date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @friendship_requests.each do |friendship_request| %>
+      <tr>
+        <td><%= friendship_request.sender %></td>
+        <td><%= friendship_request.receiver %></td>
+        <td><%= friendship_request.text %></td>
+        <td><%= friendship_request.expiration_date %></td>
+        <td><%= link_to 'Show', friendship_request %></td>
+        <td><%= link_to 'Edit', edit_friendship_request_path(friendship_request) %></td>
+        <td><%= link_to 'Destroy', friendship_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Friendship Request', new_friendship_request_path %>

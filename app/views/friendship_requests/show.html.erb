@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @friendship_request.sender %>
+</p>
+
+<p>
+  <strong>Receiver:</strong>
+  <%= @friendship_request.receiver %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @friendship_request.text %>
+</p>
+
+<p>
+  <strong>Expiration date:</strong>
+  <%= @friendship_request.expiration_date %>
+</p>
+
+<%= link_to 'Edit', edit_friendship_request_path(@friendship_request) %> |
+<%= link_to 'Back', friendship_requests_path %>

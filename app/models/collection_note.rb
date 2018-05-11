@@ -1,0 +1,2 @@
+class CollectionNote < ApplicationRecord
+end
