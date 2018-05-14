@@ -6,9 +6,30 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+
   </head>
 
   <body>
+
+	<% flash.each do |name, msg|%>
+		<% if  msg.include? "ERROR" %>
+			<%= content_tag :div, msg, :id =>"flash_#name", :class => "alert Absolute-Center center" do %>
+				<%= content_tag :span, msg, class: "pull-right" %>
+				<%= content_tag :span, "×", class: "closebtn", :onclick => "this.parentElement.style.display='none';" %>
+			<% end %>
+		<% else %>
+			<%= content_tag :div, msg, :id =>"flash_#name", :class => "information Absolute-Center center" do %>
+				<%= content_tag :span, msg, class: "pull-right" %>
+				<%= content_tag :span, "×", class: "closebtn", :onclick => "this.parentElement.style.display='none';" %>
+			<% end %>
+		<% end %>
+	<% end %>
+
     <%= yield %>
+
+		
+
   </body>
 </html>

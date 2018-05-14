@@ -5,14 +5,16 @@ class SessionController < ApplicationController
   def create
   	@user=User.find_by name:	params[:username]
       if !@user
-        flash.now.alert="ERROR! Username #{params[:username]} was invalid"
-        render :new
+        #flash.now.alert="ERROR! Username #{params[:username]} was invalid"
+        redirect_to '/login', :notice => "ERROR! Username #{params[:username]}"
+        #render :new
       elsif @user.password == params[:password]
         session[:user]=@user.name
         redirect_to notes_url, :notice => "Logged in!"
       else
-        flash.now.alert="ERROR! Password was invalid"
-        render :new
+        #flash.now.alert="ERROR! Password was invalid"
+        redirect_to '/login',:notice => "ERROR! Username #{params[:username]}"
+        #render :new
 	end
   end
 
