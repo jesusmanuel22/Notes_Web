@@ -25,17 +25,21 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     user = User.find_by(name: user_params[:name])
     if user == nil
-      if user_params[:user_password]== user_params[:user_rpassword]
-        if @user.save
-          redirect_to login_url, :notice => "Signed up!"
+      if user_params[:password] == params[:rpassword]
+        if user_params[:password]!= '' && user_params[:password]!=' '
+          if @user.save
+            redirect_to login_url, :notice => "Signed up!"
+          else
+            render :new
+          end
         else
-          render :new
+          redirect_to signup_url, :notice => "ERROR, Password can't be empty"
         end
-      else
-        redirect_to signup_url, :notice => "ERROR passwords must be equals."
+
+      else 
+        redirect_to signup_url, :notice => "ERROR, password must be equals"
       end
     else
       redirect_to signup_url, :notice => "ERROR username already exits!"
