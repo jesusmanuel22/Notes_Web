@@ -4,9 +4,26 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    @user=User.find_by name: session[:user]
+    @notes=Array.new
+    #@notes = Note.where('note.id LIKE "user_notes".id_note AND "user_notes".id_user == ?', "#{@user.id}")
+    sql = "SELECT 'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.'id' == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}"
+    result = ActiveRecord::Base.connection.execute(sql)
+    result.each do |row|
+     @note = Note.new
+     @note.id = row[0]
+     @note.title = row[1]
+     @note.text = row[2]
+     @note.image = row[3]
+     @notes.push(@note)
+    end
+    #@result.each do |notes|
+     #@notes=Note.select("'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.id == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}")
+    #end
+    #@notes = Note.joins(:user_note).where("id_user == #{@user.id}").uniq
 	#@user=User.find_by name: session[:user]
 	#@notes = Note.where('id_user LIKE ?', "#{@user.id}")
+
   end
 
   def allnotes
