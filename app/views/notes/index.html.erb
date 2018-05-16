@@ -42,7 +42,7 @@
 			<!-- Navigation -->
 			<nav class="navbar navbar-default navbar-static-top m-b-0">
 				<div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
-					<div class="top-left-part"><a class="logo" href="/"><b><img src="../plugins/images/logo.png" alt="home" /></b><span class="hidden-xs"><img src="../plugins/images/text.png" alt="home" /></span></a></div>
+					<div class="top-left-part"><a style="background:transparent;"  class="logo" href="/"><b><img src="../plugins/images/logo.png" alt="home" /></b><span class="hidden-xs"><img src="../plugins/images/text.png" alt="home" /></span></a></div>
 					<ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
 						<li>
 							<form role="search" class="app-search hidden-xs">
@@ -91,7 +91,7 @@
 					<div class="row bg-title">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 							<h4 class="page-title">Notes</h4> </div>
-						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">New Note</a>
+						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="notes/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">New Note</a>
 						</div>
 						<!-- /.col-lg-12 -->
 					</div>
@@ -106,7 +106,23 @@
 										<div class="col-md-6 col-sm-6 col-xs-6"> <i data-icon="E" class="linea-icon linea-basic"></i>
 											<h4 class="text-muted vb"><strong><%= note.title %></strong></h4> </div>
 										<div class="col-md-6 col-sm-6 col-xs-6">
-											<h4 class="counter text-right m-t-15 text-megna"><i class="fa fa-lg fa-image"></i></h4></div>
+											<h4 class="counter text-right m-t-15 text-megna">
+											
+												<%= link_to(note.image, style:"background:transparent;") do %>
+													<i class="fa fa-lg fa-image"></i> 
+												<% end %>
+												
+												<i class="fa fa-lg fa-globe"></i> 
+											
+												<%= link_to(edit_note_path(note), style:"background:transparent;") do %>
+													<i class="fa fa-lg fa-edit"></i> 
+												<% end %>
+											
+												<%= link_to(note, method: :delete, style:"background:transparent;", data: { confirm: "Are you sure?" }) do %>
+													<i class="fa fa-lg fa-trash"></i>
+												<% end %>
+												
+											</h4></div>
 										<div class="col-md-12 col-sm-12 col-xs-12">
 											<h5 class="text-muted vb"><%= note.text %></h5>
 										</div>
