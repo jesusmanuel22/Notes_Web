@@ -5,8 +5,14 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @notes = Note.all
+	#@user=User.find_by name: session[:user]
+	#@notes = Note.where('id_user LIKE ?', "#{@user.id}")
   end
 
+  def allnotes
+	@notes = Note.all
+  end
+  
   # GET /notes/1
   # GET /notes/1.json
   def show
