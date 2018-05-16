@@ -30,6 +30,11 @@ class NotesController < ApplicationController
       if @note.save
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
+        @user_note = UserNote.new
+        @user=User.find_by name: session[:user]
+        @user_note.id_user = @user.id
+        @user_note.id_note = @note.id
+        @user_note.save
       else
         format.html { render :new }
         format.json { render json: @note.errors, status: :unprocessable_entity }

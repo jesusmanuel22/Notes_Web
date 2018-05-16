@@ -4,7 +4,7 @@ class CreateUserNotes < ActiveRecord::Migration[5.1]
       t.integer :id_user
       t.integer :id_note
 
-      t.timestamps
-    end
+     t.timestamps
+   end
   end
 end

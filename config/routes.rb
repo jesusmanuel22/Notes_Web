@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users
   resources :session
   resources :notes
+  resources :user_notes
   root :to => "session#new"
   
   #get 'session/new'
