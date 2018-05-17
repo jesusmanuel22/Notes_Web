@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :not_require_login, only: [:new]
+  
   # GET /users
   # GET /users.json
   def index
@@ -82,5 +83,17 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :password, :avatar, :admin)
+    end
+	
+  private
+	def not_require_login
+	    if logged_in?
+		 # flash[:error] = !!session[:user]
+		    redirect_to notes_url # halts request cycle
+		end
+	end
+
+	def logged_in?
+	    !!session[:user]
     end
 end

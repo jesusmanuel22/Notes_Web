@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_login
   # GET /notes
   # GET /notes.json
   def index
@@ -94,6 +94,22 @@ class NotesController < ApplicationController
     def set_note
       @note = Note.find(params[:id])
     end
+	
+	  def require_login
+		unless logged_in?
+		  flash[:error] = "You must be logged in to access"
+		  redirect_to :root # halts request cycle
+		end
+	  end
+
+	  # The logged_in? method simply returns true if the user is logged
+	  # in and false otherwise. It does this by "booleanizing" the
+	  # current_user method we created previously using a double ! operator.
+	  # Note that this is not common in Ruby and is discouraged unless you
+	  # really mean to convert something into true or false.
+	  def logged_in?
+		!!session[:user]
+	  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
