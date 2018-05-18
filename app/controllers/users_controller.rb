@@ -63,7 +63,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   # DELETE /users/1.json
-  def destroy
+  def primerdestruir
     @user=User.find_by name: session[:user]
     #@notes = Note.where('user_id LIKE ?', "#{@user.id}")
     #@notes.each do |note|
@@ -72,6 +72,31 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     redirect_to "/logout", :notice => "The user was successfully destroyed."
     
+  end
+  
+def destroy
+    #@user=User.find_by name: session[:user]
+
+    #DELETE NOTES TOO
+
+    @user_notes = UserNote.where('id_user LIKE ?', "#{@user.id}")
+    @user_notes.each do |usernote|
+      if UserNote.where('id_note LIKE ?', "#{usernote.id_note}").count == 1
+        Note.find(usernote.id_note).destroy
+      end
+
+      usernote.destroy
+
+    end
+
+
+    ##################### QUEDA HACER LO MISMO CON LAS COLECCIONES ###########################
+
+
+    @user.destroy
+    #User.find(params[:id]).destroy
+    redirect_to "/logout", :notice => "The user was successfully destroyed."
+
   end
 
   private
