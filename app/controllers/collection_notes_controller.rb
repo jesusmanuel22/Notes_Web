@@ -25,7 +25,6 @@ class CollectionNotesController < ApplicationController
   # POST /collection_notes.json
   def create
     @collection_note = CollectionNote.new(collection_note_params)
-
     respond_to do |format|
       if @collection_note.save
         format.html { redirect_to @collection_note, notice: 'Collection note was successfully created.' }

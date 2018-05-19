@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   resources :session
   
   #NOTES
+  
   resources :notes
   get "allnotes" => "notes#allnotes"
+  delete 'note' => 'notes#destroy'
   
   #USER NOTES
   resources :user_notes

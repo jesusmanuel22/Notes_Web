@@ -111,14 +111,14 @@
 												<%= link_to(note.image, style:"background:transparent;") do %>
 													<i class="fa fa-lg fa-image"></i> 
 												<% end %>
-												
+												<%= link_to(edit_note_path(note), style:"background:transparent;") do %>
 												<i class="fa fa-lg fa-globe"></i> 
-											
+												<% end %>
 												<%= link_to(edit_note_path(note), style:"background:transparent;") do %>
 													<i class="fa fa-lg fa-edit"></i> 
 												<% end %>
 											
-												<%= link_to(note, method: :delete, style:"background:transparent;", data: { confirm: "Are you sure?" }) do %>
+												<%= link_to(note_path(note), method: :delete, style:"background:transparent;", data: { confirm: "Are you sure?" }) do %>
 													<i class="fa fa-lg fa-trash"></i>
 												<% end %>
 												
