@@ -89,7 +89,7 @@ class NotesController < ApplicationController
 
     UserNote.where('id_note LIKE ? AND id_user LIKE ?', "#{@note.id}" , "#{@user.id}" ).destroy_all
     redirect_to :notes
-
+    
   end
 
   private

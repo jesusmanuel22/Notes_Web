@@ -73,7 +73,74 @@ class UsersController < ApplicationController
     redirect_to "/logout", :notice => "The user was successfully destroyed."
     
   end
+
   
+  #Send Request Friend
+  def sendFriendRequest
+    @sender = (User.find_by name: session[:user])
+    @existRequest = FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@friendshipreqs.id}","#{@sender.id}").count
+    @existRequest2 = FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@sender.id}","#{@friendshipreqs.id}").count
+    @existFriend = Friend.where('id_user1 LIKE ? AND id_user2 LIKE ? ',"#{@friendshipreqs.id}","#{@sender.id}").count
+    @existFriend2 = Friend.where('id_user1 LIKE ? AND id_user2 LIKE ? ',"#{@sender.id}","#{@friendshipreqs.id}").count
+    if(@existRequest!=0 || @existRequest2!=0 || @existFriend!=0 || @existFriend2!=0 )
+      @request = FriendshipRequest.new
+      @request.sender = @sender.id
+      @request.receiver = @user.id
+      @request.text = "#{@sender.name} wants to be your friend"
+      @request.expiration_date = "#{DateTime.now » 1}"
+      if @request.save
+        redirect_to notes_url, :notice => "Request sended!"
+      else
+        render :new
+      end
+    else
+      redirect_to notes_url, :notice => "This request exist!"
+    end
+    
+    
+  end
+#Muestra las peticiones de amistad pendiente
+  def showFriendsRequest
+    @user=User.find_by name: session[:user]
+    @friends = FriendshipRequest.where('receiver LIKE ?',"#{@user.id}")
+    @finalFriends = Array.new
+    @friends.each do |friend|
+
+      if(DateTime.now > friend.expiration_date.to_date)
+        friend.destroy
+      else
+        finalFriends.push(friend)
+      end
+    end
+  end
+  
+
+
+  def numFriendRequest
+    @numpetitions = FriendshipRequests.numberFriendsRequest
+
+  end
+
+#Aceptar peticiones amistad
+  def acceptFriendshipRequest
+    @user = (User.find_by name: session[:user])
+    @friendship = Friend.new
+    @friendship.id_user1 = @friendshipreqs.id
+    @friendship.id_user2 = @user.id
+    @friendship.save
+
+    FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@friendshipreqs.id}","#{@user.id}").destroy_all
+    redirect_to :back
+  end
+
+
+  #Rechazar peticiones amistad
+  def denialFriendshipRequest
+    @user = (User.find_by name: session[:user])
+    FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@friendshipreqs.id}","#{@user.id}").destroy_all
+    redirect_to :back
+  end
+
 def destroy
     #@user=User.find_by name: session[:user]
 
@@ -98,6 +165,8 @@ def destroy
     redirect_to "/logout", :notice => "The user was successfully destroyed."
 
   end
+  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

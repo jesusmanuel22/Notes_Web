@@ -61,6 +61,15 @@ class FriendshipRequestsController < ApplicationController
     end
   end
 
+  
+  def numberFriendsRequest
+    
+    @user=User.find_by name: session[:user]
+    @petitions = FriendshipRequest.where('receiver LIKE ?', "#{user.id}").count
+
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_friendship_request

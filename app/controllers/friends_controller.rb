@@ -16,6 +16,21 @@ class FriendsController < ApplicationController
   def new
     @friend = Friend.new
   end
+  
+
+  #Get User Friends
+  def getFriends
+    @user=User.find_by name: session[:user]
+    @friends = Friend.where('id_user1 LIKE ? OR id_user2 LIKE ?',"#{@user.id}","#{@user.id}");
+    @usersFriends = Array.new
+    @friends.each do |friend|
+      if friend.id_user1 == "#{@user.id}"
+        @usersFriends.push(Users.find(friend.id_user2))
+      else
+        @usersFriends.push(Users.find(friend.id_user1))
+      end
+    end
+  end
 
   # GET /friends/1/edit
   def edit
