@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   get "signup" => "users#new", :as => "signup"
   resources :users
   resources :session
+    resources :users do
+    collection do
+	  get 'search/:name' => "users#search"
+    end
+  end
   
   #NOTES
   
@@ -25,8 +30,9 @@ Rails.application.routes.draw do
   resources :collections
   
   #FRIENDS
-  resources :friends
-  
+
+  get "friends" => "friends#getFriends"
+  resources :friends  
   
   
   #get 'session/new'

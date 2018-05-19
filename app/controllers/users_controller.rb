@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :not_require_login, only: [:new]
+  before_action :search, only: [:search]
   
   # GET /users
   # GET /users.json
@@ -74,6 +75,28 @@ class UsersController < ApplicationController
     
   end
 
+  # SEARCH USER
+  def search
+    @user = Array.new
+	if params[:name]
+	  @users = User.where('name LIKE ?', "%#{params[:name]}%")
+	  
+	  @users.each do |user|
+	    if user.name != session[:user]
+		  @user.push(user)
+	    end
+	  end
+	else
+      @user = User.all
+		
+	  @users.each do |user|
+		if user.name != session[:user]
+		  @user.push(user)
+        end
+	  end
+	end
+  end
+  
   
   #Send Request Friend
   def sendFriendRequest
