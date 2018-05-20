@@ -30,6 +30,10 @@ class NotesController < ApplicationController
 	@notes = Note.all
   end
   
+  def share
+  @notes = Note.all
+  end
+  
   # GET /notes/1
   # GET /notes/1.json
   def show
