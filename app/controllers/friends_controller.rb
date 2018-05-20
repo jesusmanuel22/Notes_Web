@@ -4,7 +4,8 @@ class FriendsController < ApplicationController
   # GET /friends
   # GET /friends.json
   def index
-    @friends = Friend.all
+    #@friends = Friend.all
+	getFriends
   end
 
   # GET /friends/1
@@ -25,9 +26,9 @@ class FriendsController < ApplicationController
     @usersFriends = Array.new
     @friends.each do |friend|
       if friend.id_user1 == "#{@user.id}"
-        @usersFriends.push(Users.find(friend.id_user2))
+        @usersFriends.push(User.find(friend.id_user2))
       else
-        @usersFriends.push(Users.find(friend.id_user1))
+        @usersFriends.push(User.find(friend.id_user1))
       end
     end
   end

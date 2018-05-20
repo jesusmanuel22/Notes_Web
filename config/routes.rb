@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   
   #FRIENDS
 
-  get "friends" => "friends#getFriends"
+  #get "friends" => "friends#getFriends"
   resources :friends  
   
   
