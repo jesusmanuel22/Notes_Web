@@ -28,7 +28,7 @@ class UserNotesController < ApplicationController
 
     respond_to do |format|
       if @user_note.save
-        format.html { redirect_to @user_note, notice: 'User note was successfully created.' }
+        format.html { redirect_to '/notes'}#@user_note, notice: 'User note was successfully created.' }
         format.json { render :show, status: :created, location: @user_note }
       else
         format.html { render :new }
