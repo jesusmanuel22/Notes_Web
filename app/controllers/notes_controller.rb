@@ -31,7 +31,17 @@ class NotesController < ApplicationController
   end
   
   def share
-  @notes = Note.all
+	@user=User.find_by name: session[:user]
+    @friends = Friend.where('id_user1 LIKE ? OR id_user2 LIKE ?',"#{@user.id}","#{@user.id}");
+    @usersFriends = Array.new
+    @friends.each do |friend|
+      if friend.id_user1 == @user.id
+        @usersFriends.push(User.find(friend.id_user2))
+      else
+        @usersFriends.push(User.find(friend.id_user1))
+      end
+    end
+	#@notes = Friend.getFriends
   end
   
   # GET /notes/1
