@@ -37,6 +37,17 @@ class FriendsController < ApplicationController
   def edit
   end
 
+  #DELETE FRIENDS
+  def destroyFriend
+      friendDestroy=params[:friendDestroy]
+      @session = User.find_by name: session[:user]
+      @friendship = Friend.where('id_user1 LIKE ? AND id_user2 LIKE ?', "#{@session.id}","#{friendDestroy}")
+      @friendship.destroy_all
+      @friendship = Friend.where('id_user2 LIKE ? AND id_user1 LIKE ?', "#{@session.id}","#{friendDestroy}")
+      @friendship.destroy_all
+      redirect_to friends_url
+  end
+
   # POST /friends
   # POST /friends.json
   def create

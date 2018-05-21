@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :collections
   
   #FRIENDS
-
+  post "friends/destroyFriend"
   #get "friends" => "friends#getFriends"
   resources :friends  
   

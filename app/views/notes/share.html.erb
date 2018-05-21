@@ -132,8 +132,14 @@
 														<div style="display:none">
 															<%= form.number_field :id_note, id: :user_note_id_note, :value => params[:name] %>
 														</div>
-													
+														<% 
+														@existRelation = UserNote.where('id_user LIKE ? AND id_note LIKE ? ',"#{user.id}","#{params[:name]}").count
+														%>
+														<% if @existRelation == 0 %>
 														<%= form.submit "Share Note" %>
+														<% else %>
+														 This user already has this note.
+														<% end %>
 													</td>
 												<% end %>
 											</tr>

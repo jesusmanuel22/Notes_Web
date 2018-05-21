@@ -122,6 +122,7 @@
 											<tr>
 												<td><%= user.avatar %></td>
 												<td><%= user.name %></td>
+												<td> <%= button_to "Delete Friend", { :action => "destroyFriend", :controller =>"friends", :friendDestroy => user} %> </td>
 											</tr>
 										<% end %>
                                     </tbody>
