@@ -49,7 +49,7 @@
 			<!-- Navigation -->
 			<nav class="navbar navbar-default navbar-static-top m-b-0">
 				<div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
-					<div class="top-left-part"><a style="background:transparent;"  class="logo" href="/notes"><b><img src="../../../plugins/images/logo.png" alt="home" /></b><span class="hidden-xs"><img src="../../../plugins/images/text.png" alt="home" /></span></a></div>
+					<div class="top-left-part"><a style="background:transparent;"  class="logo" href="/notes"><b><img src="/plugins/images/logo.png"alt="home" /></b><span class="hidden-xs"><img src="/plugins/images/text.png" alt="home" /></span></a></div>
 					<ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
 						<li>
 							<form action="javascript:search(search_username.value)" role="search" class="app-search hidden-xs">
@@ -59,7 +59,7 @@
 					</ul>
 					<ul class="nav navbar-top-links navbar-right pull-right">
 						<li>
-							<a class="profile-pic" href="#"> <img src="../../../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><%= user = session[:user] %></b> </a>
+							<a class="profile-pic" href="#"> <img src="/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><%= user = session[:user] %></b> </a>
 						</li>
 					</ul>
 				</div>
@@ -122,21 +122,18 @@
 											<tr>
 												<td><%= user.avatar %></td>
 												<td><%= user.name %></td>
+												<td>
+													<%= form_for :user_note, :html => {:multipart => true}, :url => :user_notes do |form| %>
 												
-												<%= form_for :user_note, :html => {:multipart => true}, :url => "/user_notes" do |form| %>
-												
-													<div class="field" style="display:none">
-														<%= form.number_field :id_user, id: :user_note_id_user, :value => user.id %>
-													</div>
-
-													<div class="field" style="display:none">
-														<%= form.number_field :id_note, id: :user_note_id_note, :value => params[:name] %>
-													</div>
-													
-													<td>
-														<div class="actions">
-															<%= form.submit "Share Note" %>
+														<div style="display:none">
+															<%= form.number_field :id_user, id: :user_note_id_user, :value => user.id %>
 														</div>
+
+														<div style="display:none">
+															<%= form.number_field :id_note, id: :user_note_id_note, :value => params[:name] %>
+														</div>
+													
+														<%= form.submit "Share Note" %>
 													</td>
 												<% end %>
 											</tr>
