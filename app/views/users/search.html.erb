@@ -73,19 +73,19 @@
 				<div class="sidebar-nav navbar-collapse slimscrollsidebar">
 					<ul class="nav" id="side-menu">
 						<li style="padding: 10px 0 0;">
-							<a href="notes" class="waves-effect"><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Notes</span></a>
+							<a href="../../notes" class="waves-effect"><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Notes</span></a>
 						</li>
 						<li>
-							<a href="collections" class="waves-effect"><i class="fa fa-object-group  fa-fw" aria-hidden="true"></i><span class="hide-menu">Collections</span></a>
+							<a href="../../collections" class="waves-effect"><i class="fa fa-object-group  fa-fw" aria-hidden="true"></i><span class="hide-menu">Collections</span></a>
 						</li>
 						<li>
-							<a href="friends" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i><span class="hide-menu">Friends</span></a>
+							<a href="../../friends" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i><span class="hide-menu">Friends</span></a>
 						</li>
 						<li>
-							<a href="profile" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
+							<a href="../../profile" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
 						</li>
 						<li>
-							<a href="logout" class="waves-effect"><i class="fa fa-power-off  fa-fw" aria-hidden="true"></i><span class="hide-menu">Log Out</span></a>
+							<a href="../../logout" class="waves-effect"><i class="fa fa-power-off  fa-fw" aria-hidden="true"></i><span class="hide-menu">Log Out</span></a>
 						</li>
 					</ul>
 				</div>
@@ -112,18 +112,35 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>Avatar</th>
                                             <th>Username</th>
-                                            <th>Password</th>
-                                            <th>Tweets</th>
+                                            <th>Friend</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 									
 									 <% @user.each do |user| %>
 										  <tr>
+											<td><%= user.avatar %></td>
 											<td><%= user.name %></td>
-											<td><%= user.password %></td>
-											<td> ¿NO IMPLEMENTADO? </td>
+											<%
+											@sessionuser = (User.find_by name: session[:user])
+											@existRequest = FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{user.id}","#{@sessionuser.id}").count
+    										@existRequest2 = FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@sessionuser.id}","#{user.id}").count
+											@existFriend = Friend.where('id_user1 LIKE ? AND id_user2 LIKE ? ',"#{user.id}","#{@sessionuser.id}").count
+   											@existFriend2 = Friend.where('id_user1 LIKE ? AND id_user2 LIKE ? ',"#{@sessionuser.id}","#{user.id}").count 
+   											@friendshipreqs= User.new
+											@friendshipreqs.id= user.id
+											if @existFriend!=0 || @existFriend2!=0 %>
+
+												<td>You are friends </td>
+											<% elsif  @existRequest!=0 || @existRequest2!=0%>
+												<td> Existing request </td>
+											<% else %>
+												<td><%= button_to "Add Friend", { :action => "sendFriendRequest", :controller =>"users", :friendshipreqs => user},{ class: 'btn btn-danger m-l-20 btn-rounded btn-outline  waves-effect waves-light'} %> 
+											
+												<!--<a class="btn btn-danger m-l-20 btn-rounded btn-outline  waves-effect waves-light"> Add Friend </a>--></td>
+											<% end %>
 										  </tr>
 										<% end %>
                                     </tbody>

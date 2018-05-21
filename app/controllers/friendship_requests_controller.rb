@@ -61,13 +61,14 @@ class FriendshipRequestsController < ApplicationController
     end
   end
 
-  
+
   def numberFriendsRequest
     
     @user=User.find_by name: session[:user]
     @petitions = FriendshipRequest.where('receiver LIKE ?', "#{user.id}").count
 
   end
+  
 
 
   private

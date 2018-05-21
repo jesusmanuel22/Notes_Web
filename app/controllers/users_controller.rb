@@ -100,19 +100,20 @@ class UsersController < ApplicationController
   
   #Send Request Friend
   def sendFriendRequest
+    friendshipreqs=params[:friendshipreqs]
     @sender = (User.find_by name: session[:user])
-    @existRequest = FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@friendshipreqs.id}","#{@sender.id}").count
-    @existRequest2 = FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@sender.id}","#{@friendshipreqs.id}").count
-    @existFriend = Friend.where('id_user1 LIKE ? AND id_user2 LIKE ? ',"#{@friendshipreqs.id}","#{@sender.id}").count
-    @existFriend2 = Friend.where('id_user1 LIKE ? AND id_user2 LIKE ? ',"#{@sender.id}","#{@friendshipreqs.id}").count
-    if(@existRequest!=0 || @existRequest2!=0 || @existFriend!=0 || @existFriend2!=0 )
+    @existRequest = FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{friendshipreqs}","#{@sender.id}").count
+    @existRequest2 = FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@sender.id}","#{friendshipreqs}").count
+    @existFriend = Friend.where('id_user1 LIKE ? AND id_user2 LIKE ? ',"#{friendshipreqs}","#{@sender.id}").count
+    @existFriend2 = Friend.where('id_user1 LIKE ? AND id_user2 LIKE ? ',"#{@sender.id}","#{friendshipreqs}").count
+    if(@existRequest==0 && @existRequest2==0 && @existFriend==0 && @existFriend2==0 )
       @request = FriendshipRequest.new
       @request.sender = @sender.id
-      @request.receiver = @user.id
+      @request.receiver = friendshipreqs
       @request.text = "#{@sender.name} wants to be your friend"
-      @request.expiration_date = "#{DateTime.now » 1}"
+      @request.expiration_date = "#{DateTime.now >> 1}"
       if @request.save
-        redirect_to notes_url, :notice => "Request sended!"
+        redirect_to friends_url, :notice => "Request sended!"
       else
         render :new
       end

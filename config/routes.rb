@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 	  get 'search/:name' => "users#search"
     end
   end
-  
+  post "users/sendFriendRequest"
   #NOTES
   
   resources :notes
