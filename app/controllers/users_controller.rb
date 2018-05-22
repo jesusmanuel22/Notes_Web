@@ -23,6 +23,15 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def profile
+  
+	@user = User.find_by name: session[:user]
+
+    @numnotes = (ActiveRecord::Base.connection.execute("SELECT 'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.'id' == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}")).count
+
+	@numfriends = Friend.where('id_user1 LIKE ? OR id_user2 LIKE ?',"#{@user.id}","#{@user.id}").count
+  end
+  
   # POST /users
   # POST /users.json
   def create
