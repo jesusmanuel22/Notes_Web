@@ -60,19 +60,41 @@ class CollectionsController < ApplicationController
     end
   end
 
+  # SHOW all collections from user
+  def show_collections
+    @user=User.find_by name: session[:user]
+    @user_collections = CollectionUser.where('id_user LIKE ? ', "#{@user.id}")
+    @collectionsuser = Array.new
+    @user_collections.each do |collections|
+      @collectionsuser.push(Collection.find(collections.id_collection))
+    end
+
+  end
+
+
+
   # DELETE /collections/1
   # DELETE /collections/1.json
   def destroy
-    @collection.destroy
-    respond_to do |format|
-      format.html { redirect_to collections_url, notice: 'Collection was successfully destroyed.' }
-      format.json { head :no_content }
+    @user=User.find_by name: session[:user]
+    if CollectionUser.where('id_collection LIKE ?', "#{@collection.id}").count == 1
+        CollectionNote.where('id_collection LIKE ?', "#{@collection.id}" ).destroy_all
+        CollectionUser.where('id_collection LIKE ?', "#{@collection.id}" ).destroy_all
+
+        @collection.destroy
     end
+
+    CollectionUser.where('id_collection LIKE ? AND id_user LIKE ?', "#{@collection.id}" , "#{@user.id}" ).destroy_all
+    redirect_to :collections
+    #@collection.destroy
+    #respond_to do |format|
+     # format.html { redirect_to collections_url, notice: 'Collection was successfully destroyed.' }
+     # 3format.json { head :no_content }
+    #end
   end
 
   def show_notes_collection
     @notes_collection = Notes.where('id_collection LIKE ?', "#{@collection.id}")
-
   end
 
   private

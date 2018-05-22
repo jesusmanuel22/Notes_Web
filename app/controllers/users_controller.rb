@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   
 	@user = User.find_by name: session[:user]
 
-    @numnotes = (ActiveRecord::Base.connection.execute("SELECT 'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.'id' == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}")).count
+  @numnotes = (ActiveRecord::Base.connection.execute("SELECT 'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.'id' == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}")).count
 
 	@numfriends = Friend.where('id_user1 LIKE ? OR id_user2 LIKE ?',"#{@user.id}","#{@user.id}").count
   end
@@ -188,7 +188,24 @@ def destroy
     end
 
 
-    ##################### QUEDA HACER LO MISMO CON LAS COLECCIONES ###########################
+    #DELETE Collections
+    @user_collections = CollectionUser.where('id_user LIKE ?', "#{@user.id}")
+    @user_collections.each do |collectionuser|
+      if CollectionUser.where('id_collection LIKE ?', "#{collectionuser.id_collection}").count == 1
+        Collection.find(collectionuser.id_collection).destroy
+        CollectionNote.where('id_collection LIKE ?', "#{collectionuser.id_collection}").destroy_all
+
+      end
+
+      collectionuser.destroy
+
+    end
+
+
+    ##################### QUEDA HACER LO MISMO CON LAS peticiones de amistad y amigs ###########################
+    FriendshipRequest.where('sender LIKE ? OR receiver LIKE ?', "#{@user.id}", "#{@user.id}").destroy_all 
+    Friend.where('id_user1 LIKE ? OR id_user2 LIKE ?', "#{@user.id}", "#{@user.id}").destroy_all
+
 
 
     @user.destroy

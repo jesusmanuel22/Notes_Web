@@ -32,7 +32,7 @@ class NotesController < ApplicationController
   end
   
   def share
-	@user=User.find_by name: session[:user]
+    @user=User.find_by name: session[:user]
     @friends = Friend.where('id_user1 LIKE ? OR id_user2 LIKE ?',"#{@user.id}","#{@user.id}");
     @usersFriends = Array.new
     @friends.each do |friend|
@@ -105,13 +105,14 @@ class NotesController < ApplicationController
       else
         format.html { redirect_to @note, notice: 'Note could not to be add to collection.' }
       end
-	end	
+	  end	
   end
   # DELETE /notes/1
   # DELETE /notes/1.json
  def destroy
     @user=User.find_by name: session[:user]
     if UserNote.where('id_note LIKE ?', "#{@note.id}").count == 1
+        CollectionNote.where('id_note LIKE ?', "#{@note.id}" ).destroy_all
         @note.destroy
     end
 
