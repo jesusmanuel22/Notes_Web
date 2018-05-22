@@ -126,24 +126,18 @@ class NotesController < ApplicationController
       @note = Note.find(params[:id])
     end
 	
-	  def require_login
-		unless logged_in?
-		  flash[:error] = "You must be logged in to access"
-		  redirect_to :root # halts request cycle
-		end
-		
-		@numpetitions = @petitions = FriendshipRequest.where('receiver LIKE ?', "#{(User.find_by name: session[:user]).id}").count
-	
+	def require_login
+	  unless logged_in?
+		flash[:error] = "You must be logged in to access"
+		redirect_to :root # halts request cycle
+	  else
+	    @numpetitions = @petitions = FriendshipRequest.where('receiver LIKE ?', "#{(User.find_by name: session[:user]).id}").count
 	  end
+	end
 
-	  # The logged_in? method simply returns true if the user is logged
-	  # in and false otherwise. It does this by "booleanizing" the
-	  # current_user method we created previously using a double ! operator.
-	  # Note that this is not common in Ruby and is discouraged unless you
-	  # really mean to convert something into true or false.
-	  def logged_in?
+	def logged_in?
 		!!session[:user]
-	  end
+	end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params

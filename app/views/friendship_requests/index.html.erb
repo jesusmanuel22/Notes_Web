@@ -21,6 +21,8 @@
         <td><%= friendship_request.text %></td>
         <td><%= friendship_request.expiration_date %></td>
         <td><%= link_to 'Show', friendship_request %></td>
+		<td><%= link_to 'Accept', friendship_request %></td>
+		<td><%= link_to 'Denny', friendship_request %></td>
         <td><%= link_to 'Edit', edit_friendship_request_path(friendship_request) %></td>
         <td><%= link_to 'Destroy', friendship_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

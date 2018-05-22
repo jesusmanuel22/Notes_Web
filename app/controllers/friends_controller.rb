@@ -1,6 +1,7 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_login
+  
   # GET /friends
   # GET /friends.json
   def index
@@ -94,6 +95,19 @@ class FriendsController < ApplicationController
       @friend = Friend.find(params[:id])
     end
 
+	def require_login
+	  unless logged_in?
+		flash[:error] = "You must be logged in to access"
+		redirect_to :root # halts request cycle
+	  else
+	    @numpetitions = @petitions = FriendshipRequest.where('receiver LIKE ?', "#{(User.find_by name: session[:user]).id}").count
+	  end
+	end
+
+	def logged_in?
+		!!session[:user]
+	end
+	
     # Never trust parameters from the scary internet, only allow the white list through.
     def friend_params
       params.require(:friend).permit(:id_user1, :id_user2)
