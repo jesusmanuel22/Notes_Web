@@ -101,7 +101,7 @@
 					<div class="row bg-title">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 							<h4 class="page-title">Notes</h4> </div>
-						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="notes/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">New Note</a>
+						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="notes/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline waves-effect waves-light">New Note</a>
 						</div>
 						<!-- /.col-lg-12 -->
 					</div>
@@ -118,9 +118,6 @@
 										<div class="col-md-6 col-sm-6 col-xs-6">
 											<h4 class="counter text-right m-t-15 text-megna">
 											
-												<%= link_to(note.image, style:"background:transparent;") do %>
-													<i class="fa fa-lg fa-image"></i> 
-												<% end %>
 												<%= link_to("/notes/#{note.id}/share", style:"background:transparent;") do %>
 												<i class="fa fa-lg fa-globe"></i> 
 												<% end %>

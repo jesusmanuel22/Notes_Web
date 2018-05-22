@@ -92,7 +92,20 @@ class NotesController < ApplicationController
       end
     end
   end
+  #ADD notes to collection
+  def add_to_collection
+    @exist_note = CollectionNote.where('id_collection LIKE ? AND id_note LIKE ?', "#{@collection.id}" , "#{@note.id}" ).count
+    if @exist_note == 0 
+      @collection_notes = CollectionNote.new
+      @collection_notes.id_collection = @collection.id
+      @collection_notes.id_note = @note.id 
+      if @collection_notes.save
+        format.html { redirect_to @note, notice: 'Note was successfully add to collection.' }
+      else
+        format.html { redirect_to @note, notice: 'Note could not to be add to collection.' }
+      end
 
+  end
   # DELETE /notes/1
   # DELETE /notes/1.json
  def destroy

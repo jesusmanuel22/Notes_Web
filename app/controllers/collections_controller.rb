@@ -23,6 +23,8 @@ class CollectionsController < ApplicationController
 
   # POST /collections
   # POST /collections.json
+ 
+
   def create
     @collection = Collection.new(collection_params)
 
@@ -30,9 +32,16 @@ class CollectionsController < ApplicationController
       if @collection.save
         format.html { redirect_to @collection, notice: 'Collection was successfully created.' }
         format.json { render :show, status: :created, location: @collection }
+        @user=User.find_by name: session[:user]
+
+        @collection_user = CollectionUser.new
+        @collection_user.id_collection = @collection.id
+        @collection_user.id_user = @user.id
+        @collection_user.save
       else
         format.html { render :new }
         format.json { render json: @collection.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -59,6 +68,11 @@ class CollectionsController < ApplicationController
       format.html { redirect_to collections_url, notice: 'Collection was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def show_notes_collection
+    @notes_collection = Notes.where('id_collection LIKE ?', "#{@collection.id}")
+
   end
 
   private
