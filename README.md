@@ -36,9 +36,9 @@ rails server
 
 * BORRAR NOTAS.
 
-### To Do
-
 * EDITAR NOTAS.
+
+### To Do
 
 * BORRAR MI USUARIO.
 
