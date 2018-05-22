@@ -5,7 +5,6 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @user=User.find_by name: session[:user]
-	@numpetitions = @petitions = FriendshipRequest.where('receiver LIKE ?', "#{@user.id}").count
 	
     @notes=Array.new
     #@notes = Note.where('note.id LIKE "user_notes".id_note AND "user_notes".id_user == ?', "#{@user.id}")
@@ -132,6 +131,9 @@ class NotesController < ApplicationController
 		  flash[:error] = "You must be logged in to access"
 		  redirect_to :root # halts request cycle
 		end
+		
+		@numpetitions = @petitions = FriendshipRequest.where('receiver LIKE ?', "#{(User.find_by name: session[:user]).id}").count
+	
 	  end
 
 	  # The logged_in? method simply returns true if the user is logged
