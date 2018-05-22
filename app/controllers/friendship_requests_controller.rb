@@ -4,7 +4,8 @@ class FriendshipRequestsController < ApplicationController
   # GET /friendship_requests
   # GET /friendship_requests.json
   def index
-    @friendship_requests = FriendshipRequest.all
+    #@friendship_requests = FriendshipRequest.all
+	numberFriendsRequest
   end
 
   # GET /friendship_requests/1
@@ -65,7 +66,7 @@ class FriendshipRequestsController < ApplicationController
   def numberFriendsRequest
     
     @user=User.find_by name: session[:user]
-    @petitions = FriendshipRequest.where('receiver LIKE ?', "#{user.id}").count
+    @petitions = FriendshipRequest.where('receiver LIKE ?', "#{@user.id}")
 
   end
   
