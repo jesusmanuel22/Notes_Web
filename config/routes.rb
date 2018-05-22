@@ -16,8 +16,9 @@ Rails.application.routes.draw do
     end
   end
   post "users/sendFriendRequest"
-  #NOTES
+  get "profile" => "users#profile", :as => "profile"
   
+  #NOTES
   resources :notes
   get "allnotes" => "notes#allnotes"
   delete 'note' => 'notes#destroy'
