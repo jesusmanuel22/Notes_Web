@@ -138,11 +138,8 @@ class UsersController < ApplicationController
     end
   end
   
-
-
-  def numFriendRequest
-    @numpetitions = FriendshipRequests.numberFriendsRequest
-
+  def numberFriendsRequest
+    @numpetitions = FriendshipRequest.numberFriendsRequest
   end
 
 #Aceptar peticiones amistad

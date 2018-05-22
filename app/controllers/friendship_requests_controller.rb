@@ -4,8 +4,8 @@ class FriendshipRequestsController < ApplicationController
   # GET /friendship_requests
   # GET /friendship_requests.json
   def index
-    #@friendship_requests = FriendshipRequest.all
-	numberFriendsRequest
+    #@petitions = FriendshipRequest.all
+	getFriendsRequest
   end
 
   # GET /friendship_requests/1
@@ -29,7 +29,7 @@ class FriendshipRequestsController < ApplicationController
 
     respond_to do |format|
       if @friendship_request.save
-        format.html { redirect_to @friendship_request, notice: 'Friendship request was successfully created.' }
+        format.html { redirect_to @friendship_request}#, notice: 'Friendship request was successfully created.' }
         format.json { render :show, status: :created, location: @friendship_request }
       else
         format.html { render :new }
@@ -62,15 +62,14 @@ class FriendshipRequestsController < ApplicationController
     end
   end
 
-
-  def numberFriendsRequest
-    
+  def getFriendsRequest
     @user=User.find_by name: session[:user]
     @petitions = FriendshipRequest.where('receiver LIKE ?', "#{@user.id}")
-
   end
   
-
+  def numberFriendsRequest
+	getFriendsRequest.count
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -5,6 +5,8 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @user=User.find_by name: session[:user]
+	@numpetitions = @petitions = FriendshipRequest.where('receiver LIKE ?', "#{@user.id}").count
+	
     @notes=Array.new
     #@notes = Note.where('note.id LIKE "user_notes".id_note AND "user_notes".id_user == ?', "#{@user.id}")
     sql = "SELECT 'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.'id' == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}"
@@ -104,7 +106,7 @@ class NotesController < ApplicationController
       else
         format.html { redirect_to @note, notice: 'Note could not to be add to collection.' }
       end
-
+	end	
   end
   # DELETE /notes/1
   # DELETE /notes/1.json
