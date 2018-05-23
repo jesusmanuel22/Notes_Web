@@ -1,5 +1,6 @@
 class CollectionsController < ApplicationController
   before_action :set_collection, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
 
   # GET /collections
   # GET /collections.json
@@ -104,6 +105,19 @@ class CollectionsController < ApplicationController
       @collection = Collection.find(params[:id])
     end
 
+	def require_login
+	  unless logged_in?
+		flash[:error] = "You must be logged in to access"
+		redirect_to :root # halts request cycle
+	  else
+	    @numpetitions = @petitions = FriendshipRequest.where('receiver LIKE ?', "#{(User.find_by name: session[:user]).id}").count
+	  end
+	end
+
+	def logged_in?
+	    !!session[:user]
+    end
+	
     # Never trust parameters from the scary internet, only allow the white list through.
     def collection_params
       params.require(:collection).permit(:title)
