@@ -90,6 +90,14 @@
 						<li>
 							<a href="logout" class="waves-effect"><i class="fa fa-power-off  fa-fw" aria-hidden="true"></i><span class="hide-menu">Log Out</span></a>
 						</li>
+						<li>
+							<i class="fa  fa-fw" aria-hidden="true"></i>
+						</li>
+						<% if @user.admin == true %>
+							<li>
+								<a href="users" class="waves-effect"><i class="fa fa-users  fa-fw" aria-hidden="true"></i><span class="hide-menu">All Users</span></a>
+							</li>
+						<% end %>
 					</ul>
 				</div>
 			</div>
