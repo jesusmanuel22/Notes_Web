@@ -52,6 +52,22 @@ class FriendshipRequestsController < ApplicationController
     end
   end
 
+  
+  #Aceptar peticiones amistad
+  def acceptFriendshipRequest
+    @user = (User.find_by name: session[:user])
+	@request = (FriendshipRequest.find_by id: params[:name])
+    @friendship = Friend.new
+    @friendship.id_user1 = @request.sender #params[:id]#@friendshipreqs.id
+    @friendship.id_user2 = @user.id
+    @friendship.save
+
+    FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@request.sender}","#{@user.id}").destroy_all
+	
+    redirect_to '/friendship_requests'#:back
+  end
+  
+  
   # DELETE /friendship_requests/1
   # DELETE /friendship_requests/1.json
   def destroy

@@ -155,17 +155,7 @@ class UsersController < ApplicationController
     @numpetitions = FriendshipRequest.numberFriendsRequest
   end
 
-#Aceptar peticiones amistad
-  def acceptFriendshipRequest
-    @user = (User.find_by name: session[:user])
-    @friendship = Friend.new
-    @friendship.id_user1 = @friendshipreqs.id
-    @friendship.id_user2 = @user.id
-    @friendship.save
 
-    FriendshipRequest.where('sender LIKE ? AND receiver LIKE ? ',"#{@friendshipreqs.id}","#{@user.id}").destroy_all
-    redirect_to :back
-  end
 
 
   #Rechazar peticiones amistad
