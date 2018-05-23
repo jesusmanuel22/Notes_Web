@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :not_require_login, only: [:new]
   before_action :search, only: [:search]
-    before_action :require_login, only: [:profile, :search]
+  before_action :require_login, only: [:profile, :search]
   
   # GET /users
   # GET /users.json
@@ -239,7 +239,6 @@ def destroy
       params.require(:user).permit(:name, :password, :avatar, :admin)
     end
 	
-  private
 	def not_require_login
 	    if logged_in?
 		 # flash[:error] = !!session[:user]
