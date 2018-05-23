@@ -39,6 +39,7 @@
 			}
 		</script>  
 	</head>
+	<% if @user.admin ==true %>
 
 	<body>
 		<!-- Preloader -->
@@ -228,7 +229,11 @@
 	   <!-- <script src="js/dashboard1.js"></script>-->
 		<script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
 	</body>
-
+<% else %>
+		<script type="text/javascript">
+    		window.location.href="/notes"
+  		</script>
+  <% end %>
 </html>
 
 

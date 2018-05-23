@@ -65,14 +65,25 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if User.where('name LIKE ?',"#{user_params[:name]}").count == 0 
+      respond_to do |format|
+      
+
+        if @user.update(user_params)
+          format.html { redirect_to logout_url, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      #flash[:alert] = "You must be logged in to access" 
+      
+      #redirect_back(fallback_location: root_path)
+      #redirect_to profile_url,:notice => "ERROR! Username alredy exists"
+      #flash.now[:error] = "This user name already exist."
+      #redirect_to :profile
     end
   end
 

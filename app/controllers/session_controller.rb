@@ -19,10 +19,10 @@ class SessionController < ApplicationController
         #render :new
 	end
   end
-
+ 
   def destroy
   	session[:user]=nil
-	redirect_to :root, :notice => "Logged out!"
+	  redirect_to :root, :notice => "Logged out!"
   end
   
   private

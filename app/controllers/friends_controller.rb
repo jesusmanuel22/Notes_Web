@@ -19,7 +19,15 @@ class FriendsController < ApplicationController
     @friend = Friend.new
   end
   
-
+  def allfriends
+    @allFriends = Friend.all
+    @friend1 = Array.new
+    @friend2 = Array.new
+    @allfriends.each do |friends_rel|
+      @friend1.push(User.find(friends_rel.id_user1))
+      @friend2.push(User.find(friends_rel.id_user2))
+    end
+  end
   #Get User Friends
   def getFriends
     @user=User.find_by name: session[:user]

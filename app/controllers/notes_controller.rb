@@ -115,6 +115,14 @@ class NotesController < ApplicationController
       end
 	  end	
   end
+
+
+  #Remove note from collection
+  def remove_from_collection
+    CollectionNote.where('id_note LIKE ? AND id_collection LIKE ? ', "#{@note.id}", "#{@collection.id}").destroy_all
+  end
+
+
   # DELETE /notes/1
   # DELETE /notes/1.json
  def destroy

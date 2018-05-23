@@ -54,8 +54,9 @@ Rails.application.routes.draw do
   
   #FRIENDS
   post "friends/destroyFriend"
-  #get "friends" => "friends#getFriends"
   resources :friends  
+  #get "friends" => "friends#getFriends"
+  
   #post 'user/:name' => 'user#acceptFriendshipRequest'
   
   

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+
+
 <html lang="es">
+
 	<head>
 		<!-- META INFO -->
 		<meta charset="utf-8">
@@ -39,7 +42,7 @@
 			}
 		</script>  
 	</head>
-
+	<% if @user.admin ==true %>
 	<body>
 		<!-- Preloader -->
 		<div class="preloader">
@@ -70,7 +73,7 @@
 				<!-- /.navbar-top-links -->
 				<!-- /.navbar-static-side -->
 			</nav>
-			
+
 			<!-- Left navbar-header -->
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse slimscrollsidebar">
@@ -166,6 +169,8 @@
 				<footer class="footer text-center"> 2018 &copy; SpartNotes </footer>
 			</div>
 			<!-- /#page-wrapper -->
+
+			
 		</div>
 		<!-- /#wrapper -->
 		<!-- jQuery -->
@@ -189,10 +194,12 @@
 	   <!-- <script src="js/dashboard1.js"></script>-->
 		<script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
 	</body>
-
+<% else %>
+		<script type="text/javascript">
+    		window.location.href="/notes"
+  		</script>
+  <% end %>
 </html>
-
-
 
 
 
