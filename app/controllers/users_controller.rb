@@ -126,12 +126,12 @@ class UsersController < ApplicationController
       @request.text = "#{@sender.name} wants to be your friend"
       @request.expiration_date = "#{DateTime.now >> 1}"
       if @request.save
-        redirect_to friends_url, :notice => "Request sended!"
+        redirect_to friends_url#, :notice => "Request sended!"
       else
         render :new
       end
     else
-      redirect_to notes_url, :notice => "This request exist!"
+      redirect_to notes_url#, :notice => "This request exist!"
     end
     
     

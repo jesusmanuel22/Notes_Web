@@ -100,9 +100,9 @@
 				<div class="container-fluid">
 					<div class="row bg-title">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-							<h4 class="page-title">Notes</h4> </div>
-						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="notes/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">New Note</a>
-						</div>
+							<h4 class="page-title">Search</h4> </div>
+						<!--<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="notes/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">New Note</a>
+						</div>-->
 						<!-- /.col-lg-12 -->
 					</div>
 					<!-- row -->
@@ -117,7 +117,7 @@
                                         <tr>
                                             <th>Avatar</th>
                                             <th>Username</th>
-                                            <th>Friend</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -140,7 +140,7 @@
 											<% elsif  @existRequest!=0 || @existRequest2!=0%>
 												<td> Existing request </td>
 											<% else %>
-												<td><%= button_to "Add Friend", { :action => "sendFriendRequest", :controller =>"users", :friendshipreqs => user},{ class: 'btn btn-danger m-l-20 btn-rounded btn-outline  waves-effect waves-light'} %> 
+												<td><%= button_to "Add Friend", { :action => "sendFriendRequest", :controller =>"users", :friendshipreqs => user},{ class: "btn btn-success"} %> 
 											
 												<!--<a class="btn btn-danger m-l-20 btn-rounded btn-outline  waves-effect waves-light"> Add Friend </a>--></td>
 											<% end %>
