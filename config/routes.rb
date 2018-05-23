@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   #FRIEND REQUEST
   resources :friendship_requests
+  post "friendship_requests/:name" => "friendship_requests#acceptFriendshipRequest"
+  
+  
+  
   
   #USERS
   get "logout" => "session#destroy", :as => "logout"
@@ -34,11 +38,17 @@ Rails.application.routes.draw do
   
   #COLLECTIONS
   resources :collections
+  resources :collections do
+    collection do
+	  get ':name/share' => "collections#share"
+    end
+  end
   
   #FRIENDS
   post "friends/destroyFriend"
   #get "friends" => "friends#getFriends"
   resources :friends  
+  #post 'user/:name' => 'user#acceptFriendshipRequest'
   
   
   #get 'session/new'
@@ -47,7 +57,7 @@ Rails.application.routes.draw do
 
   #get 'session/destroy'
 
-  #resources :collection_users
+  resources :collection_users
   #resources :collection_notes
 
 
