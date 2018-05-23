@@ -32,7 +32,7 @@ class CollectionsController < ApplicationController
 
     respond_to do |format|
       if @collection.save
-        format.html { redirect_to @collection, notice: 'Collection was successfully created.' }
+        format.html { redirect_to '/collections'}#@collection, notice: 'Collection was successfully created.' }
         format.json { render :show, status: :created, location: @collection }
         @user=User.find_by name: session[:user]
 
