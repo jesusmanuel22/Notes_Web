@@ -93,6 +93,10 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def adminshare
+    @user=User.find_by name: session[:user]
+    @usersFriends = User.all
+  end
 
   # DELETE /collections/1
   # DELETE /collections/1.json

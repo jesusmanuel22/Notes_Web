@@ -114,7 +114,7 @@
 				<div class="container-fluid">
 					<div class="row bg-title">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-							<h4 class="page-title">Admin Share Note</h4> </div>
+							<h4 class="page-title">Admin Share Collection</h4> </div>
 						<!--<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="notes/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">New Note</a>
 						</div>-->
 						<!-- /.col-lg-12 -->
@@ -140,22 +140,22 @@
 												<td><%= user.avatar %></td>
 												<td><%= user.name %></td>
 												<td>
-													<%= form_for :user_note, :html => {:multipart => true}, :url => :user_notes do |form| %>
+													<%= form_for :collection_user, :html => {:multipart => true}, :url => :collection_users do |form| %>
 												
 														<div style="display:none">
-															<%= form.number_field :id_user, id: :user_note_id_user, :value => user.id %>
+															<%= form.number_field :id_user, id: :collection_user_id_user, :value => user.id %>
 														</div>
 
 														<div style="display:none">
-															<%= form.number_field :id_note, id: :user_note_id_note, :value => params[:name] %>
+															<%= form.number_field :id_collection, id: :collection_user_id_note, :value => params[:name] %>
 														</div>
 														<% 
-														@existRelation = UserNote.where('id_user LIKE ? AND id_note LIKE ? ',"#{user.id}","#{params[:name]}").count
+														@existRelation = CollectionUser.where('id_user LIKE ? AND id_collection LIKE ? ',"#{user.id}","#{params[:name]}").count
 														%>
 														<% if @existRelation == 0 %>
-														<%= form.submit "Share Note" %>
+														<%= form.submit "Share Collection" %>
 														<% else %>
-														 This user already has this note.
+														 This user already has this collection.
 														<% end %>
 													</td>
 												<% end %>

@@ -45,6 +45,11 @@ Rails.application.routes.draw do
 	  get ':name/share' => "collections#share"
     end
   end
+  resources :collections do
+    collection do
+	  get ':name/adminshare' => "collections#adminshare"
+    end
+  end
   get "allcollections" => "collections#allcollections"
   
   #FRIENDS
