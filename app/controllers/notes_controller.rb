@@ -46,6 +46,11 @@ class NotesController < ApplicationController
 	#@notes = Friend.getFriends
   end
   
+  def adminshare
+    @user=User.find_by name: session[:user]
+    @usersFriends = User.all
+  end
+  
   # GET /notes/1
   # GET /notes/1.json
   def show

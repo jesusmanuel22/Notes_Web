@@ -27,6 +27,11 @@ Rails.application.routes.draw do
     collection do
 	  get ':name/share' => "notes#share"
     end
+  end  
+  resources :notes do
+    collection do
+	  get ':name/adminshare' => "notes#adminshare"
+    end
   end
   
   #USER NOTES
