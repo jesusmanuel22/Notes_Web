@@ -125,7 +125,7 @@
 											<tr>
 												<td><%= user.avatar %></td>
 												<td><%= user.name %></td>
-												<td> <%= button_to "Delete Friend", { :action => "destroyFriend", :controller =>"friends", :friendDestroy => user} %> </td>
+												<td> <%= button_to "Delete Friend", { :action => "destroyFriend", :controller =>"friends", :friendDestroy => user}, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %> </td>
 											</tr>
 										<% end %>
                                     </tbody>
