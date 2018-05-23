@@ -28,7 +28,7 @@ class CollectionUsersController < ApplicationController
 
     respond_to do |format|
       if @collection_user.save
-        format.html { redirect_to @collection_user, notice: 'Collection user was successfully created.' }
+        format.html { redirect_to '/collections'}#@collection_user, notice: 'Collection user was successfully created.' }
         format.json { render :show, status: :created, location: @collection_user }
       else
         format.html { render :new }
