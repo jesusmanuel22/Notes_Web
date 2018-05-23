@@ -4,7 +4,8 @@ class CollectionsController < ApplicationController
   # GET /collections
   # GET /collections.json
   def index
-    @collections = Collection.all
+    #@collections = Collection.all
+	show_collections
   end
 
   # GET /collections/1
@@ -64,9 +65,9 @@ class CollectionsController < ApplicationController
   def show_collections
     @user=User.find_by name: session[:user]
     @user_collections = CollectionUser.where('id_user LIKE ? ', "#{@user.id}")
-    @collectionsuser = Array.new
+    @collections = Array.new
     @user_collections.each do |collections|
-      @collectionsuser.push(Collection.find(collections.id_collection))
+      @collections.push(Collection.find(collections.id_collection))
     end
 
   end
