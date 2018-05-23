@@ -1,5 +1,6 @@
 class FriendshipRequestsController < ApplicationController
   before_action :set_friendship_request, only: [:show, :edit, :update, :destroy]
+  before_action :require_login
 
   # GET /friendship_requests
   # GET /friendship_requests.json
@@ -73,7 +74,7 @@ class FriendshipRequestsController < ApplicationController
   def destroy
     @friendship_request.destroy
     respond_to do |format|
-      format.html { redirect_to friendship_requests_url, notice: 'Friendship request was successfully destroyed.' }
+      format.html { redirect_to friendship_requests_url}#, notice: 'Friendship request was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -93,6 +94,19 @@ class FriendshipRequestsController < ApplicationController
       @friendship_request = FriendshipRequest.find(params[:id])
     end
 
+	def require_login
+	  unless logged_in?
+		flash[:error] = "You must be logged in to access"
+		redirect_to :root # halts request cycle
+	  else
+	    @numpetitions = @petitions = FriendshipRequest.where('receiver LIKE ?', "#{(User.find_by name: session[:user]).id}").count
+	  end
+	end
+
+	def logged_in?
+		!!session[:user]
+	end
+	
     # Never trust parameters from the scary internet, only allow the white list through.
     def friendship_request_params
       params.require(:friendship_request).permit(:sender, :receiver, :text, :expiration_date)
