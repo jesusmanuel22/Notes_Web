@@ -24,6 +24,11 @@ class CollectionsController < ApplicationController
   def edit
 	@user=User.find_by name: session[:user]
   end
+  
+  def allcollections
+  	@user=User.find_by name: session[:user]
+	@collections = Collection.all
+  end
 
   # POST /collections
   # POST /collections.json

@@ -4,9 +4,6 @@ Rails.application.routes.draw do
   resources :friendship_requests
   post "friendship_requests/:name" => "friendship_requests#acceptFriendshipRequest"
   
-  
-  
-  
   #USERS
   get "logout" => "session#destroy", :as => "logout"
   get "login" => "session#new", :as => "login"
@@ -43,6 +40,7 @@ Rails.application.routes.draw do
 	  get ':name/share' => "collections#share"
     end
   end
+  get "allcollections" => "collections#allcollections"
   
   #FRIENDS
   post "friends/destroyFriend"
