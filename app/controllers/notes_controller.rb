@@ -52,11 +52,13 @@ class NotesController < ApplicationController
 
   # GET /notes/new
   def new
+	@user=User.find_by name: session[:user]
     @note = Note.new
   end
 
   # GET /notes/1/edit
   def edit
+	@user=User.find_by name: session[:user]
   end
 
   # POST /notes

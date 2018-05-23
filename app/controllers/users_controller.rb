@@ -90,21 +90,22 @@ class UsersController < ApplicationController
 
   # SEARCH USER
   def search
-    @user = Array.new
+	@user=User.find_by name: session[:user]
+    @usersearch = Array.new
 	if params[:name]
 	  @users = User.where('name LIKE ?', "%#{params[:name]}%")
 	  
 	  @users.each do |user|
 	    if user.name != session[:user]
-		  @user.push(user)
+		  @usersearch.push(user)
 	    end
 	  end
 	else
-      @user = User.all
+      @usersearch = User.all
 		
 	  @users.each do |user|
 		if user.name != session[:user]
-		  @user.push(user)
+		  @usersearch.push(user)
         end
 	  end
 	end

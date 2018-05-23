@@ -90,6 +90,20 @@
 						<li>
 							<a href="logout" class="waves-effect"><i class="fa fa-power-off  fa-fw" aria-hidden="true"></i><span class="hide-menu">Log Out</span></a>
 						</li>
+						<li>
+							<i class="fa  fa-fw" aria-hidden="true"></i>
+						</li>
+						<% if @user.admin == true %>
+							<li>
+								<a href="allnotes" class="waves-effect"><i class="fa fa-tag  fa-fw" aria-hidden="true"></i><span class="hide-menu">All Notes</span></a>
+							</li>
+							<li>
+								<a href="allcollections" class="waves-effect"><i class="fa fa-tags  fa-fw" aria-hidden="true"></i><span class="hide-menu">All Collections</span></a>
+							</li>
+							<li>
+								<a href="users" class="waves-effect"><i class="fa fa-user-secret fa-fw" aria-hidden="true"></i><span class="hide-menu">All Users</span></a>
+							</li>
+						<% end %>
 					</ul>
 				</div>
 			</div>

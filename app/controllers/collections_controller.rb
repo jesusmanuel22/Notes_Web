@@ -16,11 +16,13 @@ class CollectionsController < ApplicationController
 
   # GET /collections/new
   def new
+	@user=User.find_by name: session[:user]
     @collection = Collection.new
   end
 
   # GET /collections/1/edit
   def edit
+	@user=User.find_by name: session[:user]
   end
 
   # POST /collections
@@ -73,6 +75,18 @@ class CollectionsController < ApplicationController
 
   end
 
+  def share
+    @user=User.find_by name: session[:user]
+    @friends = Friend.where('id_user1 LIKE ? OR id_user2 LIKE ?',"#{@user.id}","#{@user.id}");
+    @usersFriends = Array.new
+    @friends.each do |friend|
+      if friend.id_user1 == @user.id
+        @usersFriends.push(User.find(friend.id_user2))
+      else
+        @usersFriends.push(User.find(friend.id_user1))
+      end
+    end
+  end
 
 
   # DELETE /collections/1
