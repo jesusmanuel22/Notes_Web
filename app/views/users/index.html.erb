@@ -147,8 +147,9 @@
 										<td><%= user.password %></td>
 										<td><%= user.avatar %></td>
 										<td><%= user.admin %></td>
-										<td><%= link_to 'Edit', edit_user_path(user) %></td>
-										
+										<td><%= link_to(edit_user_path(user), style: "background: #f7fafc;") do %>
+											<button class="btn btn-success">Edit</button>
+										<% end %>
 										
 										<td><%= link_to(user, method: :delete, data: { confirm: "Are you sure?" }, style: "background: #f7fafc;") do %>
 											<button class="btn btn-danger">Destroy</button>
