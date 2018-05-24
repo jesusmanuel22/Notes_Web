@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :not_require_login, only: [:new]
   before_action :search, only: [:search]
-  before_action :require_login, only: [:profile, :search, :index, :edit]
+  before_action :require_login, only: [:profile, :search, :index, :edit, :newuser]
   
   # GET /users
   # GET /users.json
@@ -21,6 +21,11 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def newuser
+  
+	  @me = User.find_by name: session[:user]
+    @user = User.new
+  end
   # GET /users/1/edit
   def edit
   end
@@ -46,7 +51,7 @@ class UsersController < ApplicationController
       if user_params[:password] == params[:rpassword]
         if user_params[:password]!= '' && user_params[:password]!=' '
           if @user.save
-            redirect_to login_url, :notice => "Signed up!"
+            redirect_to login_url#, :notice => "Signed up!"
           else
             render :new
           end
@@ -225,7 +230,6 @@ def destroy
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-	  @me = User.find_by name: session[:user]
       @user = User.find(params[:id])
     end
 
