@@ -118,8 +118,11 @@ class CollectionsController < ApplicationController
     #end
   end
 
+
   def show_notes_collection
-    @notes_collection = Notes.where('id_collection LIKE ?', "#{@collection.id}")
+  @user=User.find_by name: session[:user]
+	@collection = Collection.find(params[:name])
+    @notes_collection = Note.where('id_collection LIKE ?', "#{@collection.id}")
   end
 
   private

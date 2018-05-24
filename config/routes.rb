@@ -53,6 +53,8 @@ Rails.application.routes.draw do
     end
   end
   get "allcollections" => "collections#allcollections"
+  get "collections/:name/notes" => "collections#show_notes_collection"
+  
   
   #FRIENDS
   post "friends/destroyFriend"
