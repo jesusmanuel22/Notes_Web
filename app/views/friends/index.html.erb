@@ -141,7 +141,13 @@
                                     <tbody>
 										<% @usersFriends.each do |user| %>
 											<tr>
-												<td><%= user.avatar %></td>
+												<td>
+													<% unless user.avatar.blank? %>
+														<%= image_tag user.avatar, :class=> "img-circle", :style => "width:36px; height:36px;" unless user.avatar.blank? %>
+													<% else %>
+														<img src="../images/default.png" alt="user-img" width="36" class="img-circle">
+													<% end %>
+												</td>
 												<td><%= user.name %></td>
 												<td> <%= button_to "Delete Friend", { :action => "destroyFriend", :controller =>"friends", :friendDestroy => user}, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %> </td>
 											</tr>

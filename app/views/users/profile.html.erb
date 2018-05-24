@@ -130,7 +130,11 @@
                             <div class="user-bg"> <img width="100%" alt="user" src="../images/bg-01.jpg">
                                 <div class="overlay-box">
                                     <div class="user-content">
-                                        <a href="javascript:void(0)"><img src="../plugins/images/users/genu.jpg" class="thumb-lg img-circle" alt="img"></a>
+										<% unless @user.avatar.blank? %>
+											<%= image_tag @user.avatar, :class=> "thumb-lg img-circle", :style => "" unless @user.avatar.blank? %>
+										<% else %>
+											<img src="../images/default.png" alt="user-img" width="36" class="thumb-lg img-circle">
+										<% end %>
                                         <h4 class="text-white"><%= @user.name %></h4>
                                         <h5 class="text-white">ID <%= @user.id %></h5>  </div>
                                 </div>

@@ -149,7 +149,13 @@
 										<td><%= user.id %></td>
 										<td><%= user.name %></td>
 										<td><%= user.password %></td>
-										<td><%= user.avatar %></td>
+										<td>
+											<% unless user.avatar.blank? %>
+												<%= image_tag user.avatar, :class=> "img-circle", :style => "width:36px; height:36px;" unless user.avatar.blank? %>
+											<% else %>
+												<img src="../images/default.png" alt="user-img" width="36" class="img-circle">
+											<% end %>
+										</td>
 										<td><%= user.admin %></td>
 										<td><%= link_to(edit_user_path(user), style: "background: #f7fafc;") do %>
 											<button class="btn btn-success">Edit</button>
