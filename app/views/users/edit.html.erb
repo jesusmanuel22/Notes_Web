@@ -62,8 +62,8 @@
 							<a class="profile-pic" href="/friendship_requests"> <i class="fa fa-users fa-2x" aria-hidden="true"><span id="notification" style="border-radius:5px; background-color:red; margin-left:5px;"><%= @numpetitions %></span></i></a>
 						</li>
 						<li>
-							<% unless @me.avatar.blank? %>
-								<a class="profile-pic" href="/profile"> <%= image_tag @me.avatar, :class=> "img-circle", :style => "width:36px; height:36px;" unless @me.avatar.blank? %><b class="hidden-xs"><%= session[:user] %></b> </a>
+							<% unless @user.avatar.blank? %>
+								<a class="profile-pic" href="/profile"> <%= image_tag @user.avatar, :class=> "img-circle", :style => "width:36px; height:36px;" unless @user.avatar.blank? %><b class="hidden-xs"><%= session[:user] %></b> </a>
 							<% else %>
 								<a class="profile-pic" href="/profile"> <img src="../../images/default.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><%= session[:user] %></b> </a>
 							<% end %>
@@ -97,7 +97,7 @@
 						<li>
 							<i class="fa  fa-fw" aria-hidden="true"></i>
 						</li>
-						<% if @me.admin == true %>
+						<% if @user.admin == true %>
 							<li>
 								<a href="../../allnotes" class="waves-effect"><i class="fa fa-tag  fa-fw" aria-hidden="true"></i><span class="hide-menu">All Notes</span></a>
 							</li>
