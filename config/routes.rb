@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   get "collections/:name/addnote" => "collections#addnote"
   get "collections/:name/addnote/:name" => "collections#save"
   
+
+  
   #FRIENDS
   post "friends/destroyFriend"
   resources :friends  
@@ -72,8 +74,18 @@ Rails.application.routes.draw do
 
   #get 'session/destroy'
 
+  #COLLECTIONS-USERS
   resources :collection_users
+  
+  #COLLECTIONS-NOTES
   resources :collection_notes
+  
+  resources :collections do
+    collection do
+	  get ':name/delete/:id' => "collections#destroyNoteFromCollection"
+    end
+  end  
+ # post "collections/destroyNoteFromCollection"
 
 
 end

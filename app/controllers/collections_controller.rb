@@ -68,6 +68,15 @@ class CollectionsController < ApplicationController
       end
     end
   end
+  
+    #DELETE FRIENDS
+  def destroyNoteFromCollection
+      @note=params[:id]
+	  @collection=params[:name]
+	  
+	   CollectionNote.where('id_note LIKE ? AND id_collection LIKE ? ', "#{@note}", "#{@collection}").destroy_all
+      redirect_to '/collections'
+  end
 
   # SHOW all collections from user
   def show_collections
