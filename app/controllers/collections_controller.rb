@@ -127,7 +127,22 @@ class CollectionsController < ApplicationController
       @Notes.push(Note.find(note_col.id_note))
     end
   end
-
+  
+  def addnote
+  	@user = User.find_by name: session[:user]
+	@notes=Array.new
+		#@notes = Note.where('note.id LIKE "user_notes".id_note AND "user_notes".id_user == ?', "#{@user.id}")
+		sql = "SELECT 'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.'id' == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}"
+		result = ActiveRecord::Base.connection.execute(sql)
+		result.each do |row|
+		 @note = Note.new
+		 @note.id = row[0]
+		 @note.title = row[1]
+		 @note.text = row[2]
+		 @note.image = row[3]
+		 @notes.push(@note)
+	end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_collection

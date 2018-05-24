@@ -54,11 +54,13 @@ Rails.application.routes.draw do
   end
   get "allcollections" => "collections#allcollections"
   get "collections/:name/notes" => "collections#show_notes_collection"
-  
+  get "collections/:name/addnote" => "collections#addnote"
+  get "collections/:name/addnote/:name" => "collections#save"
   
   #FRIENDS
   post "friends/destroyFriend"
   resources :friends  
+  get "allfriends" => "friends#allfriends"
   #get "friends" => "friends#getFriends"
   
   #post 'user/:name' => 'user#acceptFriendshipRequest'
@@ -71,7 +73,7 @@ Rails.application.routes.draw do
   #get 'session/destroy'
 
   resources :collection_users
-  #resources :collection_notes
+  resources :collection_notes
 
 
 end

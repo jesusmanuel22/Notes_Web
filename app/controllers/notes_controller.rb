@@ -109,14 +109,13 @@ class NotesController < ApplicationController
       @collection_notes.id_collection = @collection.id
       @collection_notes.id_note = @note.id 
       if @collection_notes.save
-        format.html { redirect_to @note, notice: 'Note was successfully add to collection.' }
+        format.html { redirect_to :back }#@note, notice: 'Note was successfully add to collection.' }
       else
-        format.html { redirect_to @note, notice: 'Note could not to be add to collection.' }
+        format.html { redirect_to :back}#@note, notice: 'Note could not to be add to collection.' }
       end
 	  end	
   end
-
-
+  
   #Remove note from collection
   def remove_from_collection
     CollectionNote.where('id_note LIKE ? AND id_collection LIKE ? ', "#{@note.id}", "#{@collection.id}").destroy_all

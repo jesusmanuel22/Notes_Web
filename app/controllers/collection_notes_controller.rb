@@ -27,7 +27,7 @@ class CollectionNotesController < ApplicationController
     @collection_note = CollectionNote.new(collection_note_params)
     respond_to do |format|
       if @collection_note.save
-        format.html { redirect_to @collection_note, notice: 'Collection note was successfully created.' }
+        format.html { redirect_to '/collections'} #@collection_note, notice: 'Collection note was successfully created.' }
         format.json { render :show, status: :created, location: @collection_note }
       else
         format.html { render :new }

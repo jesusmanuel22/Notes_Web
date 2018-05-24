@@ -118,7 +118,7 @@
 				<div class="container-fluid">
 					<div class="row bg-title">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-							<h4 class="page-title">Notes in Collections</h4> </div>
+							<h4 class="page-title">Add Note to Collections</h4> </div>
 						<!--<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="collections/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline waves-effect waves-light">New Collection</a>
 						</div>-->
 						<!-- /.col-lg-12 -->
@@ -127,7 +127,7 @@
 					<div class="row">
 					
 						<!-- LIST OF COLLECTIONS -->
-						<% @Notes.each do |note| %>
+						<% @notes.each do |note| %>
 							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 								<div class="white-box">
 									<div class="col-in row">
@@ -136,8 +136,27 @@
 										<div class="col-md-6 col-sm-6 col-xs-6">
 											<h4 class="counter text-right m-t-15 text-megna">
 											
-												<%= link_to(note_path(note), method: :delete, style:"background:transparent;", data: { confirm: "Are you sure?" }) do %>
-													<i class="fa fa-lg fa-minus-square"></i>
+												<%= form_for :collection_note, :html => {:multipart => true}, :url => :collection_notes do |form| %>
+											
+													<div style="display:none">
+														<%= form.number_field :id_collection, id: :collection_notes_id_collection, :value => params[:name] %>
+													</div>
+
+													<div style="display:none">
+														<%= form.number_field :id_note, id: :collection_user_id_note, :value => note.id %>
+													</div>
+											
+													<% 
+													@existRelation = CollectionNote.where('id_collection LIKE ? AND id_note LIKE ? ',"#{params[:name]}","#{note.id}").count
+													%>
+													<% if @existRelation == 0 %>
+													
+														<%= button_tag type: "submit", class: "btn btn-success" do %>
+															<i class="fa fa-lg fa-plus-square"></i> 
+														<% end %>
+													<% else %>
+														 This note is already in this collection.
+													<% end %>
 												<% end %>
 											</h4></div>
 										<div class="col-md-12 col-sm-12 col-xs-12">
