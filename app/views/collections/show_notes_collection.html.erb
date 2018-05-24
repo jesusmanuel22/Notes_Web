@@ -7,24 +7,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../../../plugins/images/favicon.png">
 		<title>Notes - SpartNotes</title>
 		
 		<!-- STYLES -->
 		<!-- Bootstrap Core CSS -->
-		<link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Menu CSS -->
-		<link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+		<link href="../../../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
 		<!-- toast CSS -->
-		<link href="../plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
+		<link href="../../../plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
 		<!-- morris CSS -->
-	   <!-- <link href="../plugins/bower_components/morrisjs/morris.css" rel="stylesheet">-->
+	   <!-- <link href="../../../plugins/bower_components/morrisjs/morris.css" rel="stylesheet">-->
 		<!-- animation CSS -->
-		<link href="css/animate.css" rel="stylesheet">
+		<link href="../../../css/animate.css" rel="stylesheet">
 		<!-- Custom CSS -->
-		<link href="css/style.css" rel="stylesheet">
+		<link href="../../../css/style.css" rel="stylesheet">
 		<!-- color CSS -->
-		<link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+		<link href="../../../css/colors/blue-dark.css" id="theme" rel="stylesheet">
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -49,7 +49,7 @@
 			<!-- Navigation -->
 			<nav class="navbar navbar-default navbar-static-top m-b-0">
 				<div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
-					<div class="top-left-part"><a style="background:transparent;"  class="logo" href="/notes"><b><img src="../plugins/images/logo.png" alt="home" /></b><span class="hidden-xs"><img src="../plugins/images/text.png" alt="home" /></span></a></div>
+					<div class="top-left-part"><a style="background:transparent;"  class="logo" href="/notes"><b><img src="../../../plugins/images/logo.png" alt="home" /></b><span class="hidden-xs"><img src="../../../plugins/images/text.png" alt="home" /></span></a></div>
 					<ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
 						<li>
 							<form action="javascript:search(search_username.value)" role="search" class="app-search hidden-xs">
@@ -65,7 +65,7 @@
 							<% unless @user.avatar.blank? %>
 								<a class="profile-pic" href="/profile"> <%= image_tag @user.avatar, :class=> "img-circle", :style => "width:36px; height:36px;" unless @user.avatar.blank? %><b class="hidden-xs"><%= user = session[:user] %></b> </a>
 							<% else %>
-								<a class="profile-pic" href="/profile"> <img src="../images/default.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><%= user = session[:user] %></b> </a>
+								<a class="profile-pic" href="/profile"> <img src="../../../images/default.png" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><%= user = session[:user] %></b> </a>
 							<% end %>
 						</li>
 					</ul>
@@ -80,32 +80,32 @@
 				<div class="sidebar-nav navbar-collapse slimscrollsidebar">
 					<ul class="nav" id="side-menu">
 						<li style="padding: 10px 0 0;">
-							<a href="notes" class="waves-effect"><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Notes</span></a>
+							<a href="../../../notes" class="waves-effect"><i class="fa fa-sticky-note-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Notes</span></a>
 						</li>
 						<li>
-							<a href="collections" class="waves-effect"><i class="fa fa-object-group  fa-fw" aria-hidden="true"></i><span class="hide-menu">Collections</span></a>
+							<a href="../../../collections" class="waves-effect"><i class="fa fa-object-group  fa-fw" aria-hidden="true"></i><span class="hide-menu">Collections</span></a>
 						</li>
 						<li>
-							<a href="friends" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i><span class="hide-menu">Friends</span></a>
+							<a href="../../../friends" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i><span class="hide-menu">Friends</span></a>
 						</li>
 						<li>
-							<a href="profile" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
+							<a href="../../../profile" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
 						</li>
 						<li>
-							<a href="logout" class="waves-effect"><i class="fa fa-power-off  fa-fw" aria-hidden="true"></i><span class="hide-menu">Log Out</span></a>
+							<a href="../../../logout" class="waves-effect"><i class="fa fa-power-off  fa-fw" aria-hidden="true"></i><span class="hide-menu">Log Out</span></a>
 						</li>
 						<li>
 							<i class="fa  fa-fw" aria-hidden="true"></i>
 						</li>
 						<% if @user.admin == true %>
 							<li>
-								<a href="allnotes" class="waves-effect"><i class="fa fa-tag  fa-fw" aria-hidden="true"></i><span class="hide-menu">All Notes</span></a>
+								<a href="../../../allnotes" class="waves-effect"><i class="fa fa-tag  fa-fw" aria-hidden="true"></i><span class="hide-menu">All Notes</span></a>
 							</li>
 							<li>
-								<a href="allcollections" class="waves-effect"><i class="fa fa-tags  fa-fw" aria-hidden="true"></i><span class="hide-menu">All Collections</span></a>
+								<a href="../../../allcollections" class="waves-effect"><i class="fa fa-tags  fa-fw" aria-hidden="true"></i><span class="hide-menu">All Collections</span></a>
 							</li>
 							<li>
-								<a href="users" class="waves-effect"><i class="fa fa-user-secret fa-fw" aria-hidden="true"></i><span class="hide-menu">All Users</span></a>
+								<a href="../../../users" class="waves-effect"><i class="fa fa-user-secret fa-fw" aria-hidden="true"></i><span class="hide-menu">All Users</span></a>
 							</li>
 						<% end %>
 					</ul>
@@ -118,46 +118,42 @@
 				<div class="container-fluid">
 					<div class="row bg-title">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-							<h4 class="page-title">Collections</h4> </div>
-						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="collections/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline waves-effect waves-light">New Collection</a>
-						</div>
+							<h4 class="page-title">Notes in Collections</h4> </div>
+						<!--<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="collections/new" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline waves-effect waves-light">New Collection</a>
+						</div>-->
 						<!-- /.col-lg-12 -->
 					</div>
 					<!-- row -->
 					<div class="row">
 					
 						<!-- LIST OF COLLECTIONS -->
-						<% @notes_collection.each do |collection| %>
+						<% @Notes.each do |note| %>
 							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 								<div class="white-box">
 									<div class="col-in row">
 										<div class="col-md-6 col-sm-6 col-xs-6"> <i data-icon="E" class="linea-icon linea-basic"></i>
-											<%= link_to("/collections/#{collection.id}/notes", style:"background:transparent;") do %>
-												<h4 class="text-muted vb"><strong><%= collection.title %></strong></h4> 
-											<% end %>
-										</div>
+											<h4 class="text-muted vb"><strong><%= note.title %></strong></h4> </div>
 										<div class="col-md-6 col-sm-6 col-xs-6">
 											<h4 class="counter text-right m-t-15 text-megna">
 											
-												<%= link_to("/collections/#{collection.id}/addnote", style:"background:transparent;") do %>
-												<i class="fa fa-lg fa-plus-square"></i> 
+												<%= link_to(note_path(note), method: :delete, style:"background:transparent;", data: { confirm: "Are you sure?" }) do %>
+													<i class="fa fa-lg fa-minus-square"></i>
 												<% end %>
-											
-												<%= link_to("/collections/#{collection.id}/share", style:"background:transparent;") do %>
-												<i class="fa fa-lg fa-globe"></i> 
-												<% end %>
-												<%= link_to(edit_collection_path(collection), style:"background:transparent;") do %>
+												<%= link_to(edit_note_path(note), style:"background:transparent;") do %>
 													<i class="fa fa-lg fa-edit"></i> 
 												<% end %>
 											
-												<%= link_to(collection_path(collection), method: :delete, style:"background:transparent;", data: { confirm: "Are you sure?" }) do %>
+												<%= link_to(note_path(note), method: :delete, style:"background:transparent;", data: { confirm: "Are you sure?" }) do %>
 													<i class="fa fa-lg fa-trash"></i>
 												<% end %>
 												
 											</h4></div>
-									<!--	<div class="col-md-12 col-sm-12 col-xs-12">
-											<h5 class="text-muted vb">< %= note.text %></h5>
-										</div>-->
+										<div class="col-md-12 col-sm-12 col-xs-12">
+											<h5 class="text-muted vb"><%= note.text %></h5>
+											<% if note.image != "" %>
+												<%= image_tag note.image, :style => "max-width:100px;max-height:150px;" %>
+											<% end %>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -173,54 +169,25 @@
 		</div>
 		<!-- /#wrapper -->
 		<!-- jQuery -->
-		<script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="../../../plugins/bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap Core JavaScript -->
-		<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="../../../bootstrap/dist/js/bootstrap.min.js"></script>
 		<!-- Menu Plugin JavaScript -->
-		<script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+		<script src="../../../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 		<!--slimscroll JavaScript -->
-		<script src="js/jquery.slimscroll.js"></script>
+		<script src="../../../js/jquery.slimscroll.js"></script>
 		<!--Wave Effects -->
-		<script src="js/waves.js"></script>
+		<script src="../../../js/waves.js"></script>
 		<!--Counter js -->
-		<script src="../plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
-		<script src="../plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+		<script src="../../../plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+		<script src="../../../plugins/bower_components/counterup/jquery.counterup.min.js"></script>
 		<!--Morris JavaScript -->
-		<script src="../plugins/bower_components/raphael/raphael-min.js"></script>
-	   <!-- <script src="../plugins/bower_components/morrisjs/morris.js"></script>-->
+		<script src="../../../plugins/bower_components/raphael/raphael-min.js"></script>
+	   <!-- <script src="../../../plugins/bower_components/morrisjs/morris.js"></script>-->
 		<!-- Custom Theme JavaScript -->
-		<script src="js/custom.min.js"></script>
+		<script src="../../../js/custom.min.js"></script>
 	   <!-- <script src="js/dashboard1.js"></script>-->
-		<script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+		<script src="../../../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
 	</body>
 
 </html>
-
-
-<!--<p id="notice"><%= notice %></p>
-
-<h1>Collections</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @collections.each do |collection| %>
-      <tr>
-        <td><%= collection.title %></td>
-        <td><%= link_to 'Show', collection %></td>
-        <td><%= link_to 'Edit', edit_collection_path(collection) %></td>
-        <td><%= link_to 'Destroy', collection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Collection', new_collection_path %>-->

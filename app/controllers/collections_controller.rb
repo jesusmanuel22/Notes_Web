@@ -118,11 +118,14 @@ class CollectionsController < ApplicationController
     #end
   end
 
-
   def show_notes_collection
-  @user=User.find_by name: session[:user]
+  	@user = User.find_by name: session[:user]
 	@collection = Collection.find(params[:name])
-    @notes_collection = Note.where('id_collection LIKE ?', "#{@collection.id}")
+    @notes_collection = CollectionNote.where('id_collection LIKE ?', "#{@collection.id}")
+    @Notes = Array.new
+    @notes_collection.each do |note_col|
+      @Notes.push(Note.find(note_col.id_note))
+    end
   end
 
   private
