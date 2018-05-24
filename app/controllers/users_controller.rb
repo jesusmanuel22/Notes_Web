@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :not_require_login, only: [:new]
   before_action :search, only: [:search]
-  before_action :require_login, only: [:profile, :search, :index]
+  before_action :require_login, only: [:profile, :search, :index, :edit]
   
   # GET /users
   # GET /users.json
@@ -225,6 +225,7 @@ def destroy
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
+	  @me = User.find_by name: session[:user]
       @user = User.find(params[:id])
     end
 
