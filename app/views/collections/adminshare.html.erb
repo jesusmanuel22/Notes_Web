@@ -163,7 +163,7 @@
 														@existRelation = CollectionUser.where('id_user LIKE ? AND id_collection LIKE ? ',"#{user.id}","#{params[:name]}").count
 														%>
 														<% if @existRelation == 0 %>
-														<%= form.submit "Share Collection" %>
+														<%= form.submit class:"btn btn-success", :value => "Share Collection" %>
 														<% else %>
 														 This user already has this collection.
 														<% end %>
