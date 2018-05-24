@@ -126,16 +126,22 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   # DELETE /notes/1.json
  def destroy
-    @user=User.find_by name: session[:user]
-    if UserNote.where('id_note LIKE ?', "#{@note.id}").count == 1
-        CollectionNote.where('id_note LIKE ?', "#{@note.id}" ).destroy_all
-        @note.destroy
-    end
-
-    UserNote.where('id_note LIKE ? AND id_user LIKE ?', "#{@note.id}" , "#{@user.id}" ).destroy_all
-    redirect_to :notes
+ 	@user=User.find_by name: session[:user]
     
-  end
+	if UserNote.where('id_note LIKE ?', "#{@note.id}").count == 1
+    	CollectionNote.where('id_note LIKE ?', "#{@note.id}" ).destroy_all
+    	@note.destroy
+	end
+
+	UserNote.where('id_note LIKE ? AND id_user LIKE ?', "#{@note.id}" , "#{@user.id}" ).destroy_all
+	redirect_to :notes
+    
+ end
+ def admin_destroy
+ 	UserNote.where('id_note LIKE ?', "#{@note.id}").destroy_all
+    CollectionNote.where('id_note LIKE ?', "#{@note.id}" ).destroy_all
+    @note.destroy
+ end
 
   private
     # Use callbacks to share common setup or constraints between actions.

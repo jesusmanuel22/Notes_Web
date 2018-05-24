@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
 	@numfriends = Friend.where('id_user1 LIKE ? OR id_user2 LIKE ?',"#{@user.id}","#{@user.id}").count
 	
-    @numcollections = (CollectionUser.where('id_user LIKE ? ', "#{@user.id}")).count
+  @numcollections = (CollectionUser.where('id_user LIKE ? ', "#{@user.id}")).count
 
   end
   

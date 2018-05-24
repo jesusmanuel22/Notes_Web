@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :notes
   get "allnotes" => "notes#allnotes"
   delete 'note' => 'notes#destroy'
+  #admin_destroy 'note' => 'notes#admin_destroy'
   resources :notes do
     collection do
 	  get ':name/share' => "notes#share"
