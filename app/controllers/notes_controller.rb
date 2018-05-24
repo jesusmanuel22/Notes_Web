@@ -138,9 +138,11 @@ class NotesController < ApplicationController
     
  end
  def admin_destroy
+	@note = Note.find(params[:name])
  	UserNote.where('id_note LIKE ?', "#{@note.id}").destroy_all
     CollectionNote.where('id_note LIKE ?', "#{@note.id}" ).destroy_all
     @note.destroy
+	redirect_to :allnotes
  end
 
   private

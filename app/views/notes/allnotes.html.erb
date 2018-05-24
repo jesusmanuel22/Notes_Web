@@ -144,7 +144,7 @@
 													<i class="fa fa-lg fa-edit"></i> 
 												<% end %>
 											
-												<%= link_to(note_path(note), method: :delete, style:"background:transparent;", data: { confirm: "Are you sure?" }) do %>
+												<%= link_to(note_path(note), method: :admin_destroy, style:"background:transparent;", data: { confirm: "Are you sure?" }) do %>
 													<i class="fa fa-lg fa-trash"></i>
 												<% end %>
 												

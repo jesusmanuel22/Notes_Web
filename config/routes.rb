@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   resources :notes
   get "allnotes" => "notes#allnotes"
   delete 'note' => 'notes#destroy'
-  #admin_destroy 'note' => 'notes#admin_destroy'
   resources :notes do
     collection do
 	  get ':name/share' => "notes#share"
@@ -35,7 +34,8 @@ Rails.application.routes.draw do
 	  get ':name/adminshare' => "notes#adminshare"
     end
   end
-  
+  post "notes/:name" => 'notes#admin_destroy'
+	
   #USER NOTES
   resources :user_notes
   root :to => "session#new"
