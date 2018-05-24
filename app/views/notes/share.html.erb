@@ -153,7 +153,7 @@
 														@existRelation = UserNote.where('id_user LIKE ? AND id_note LIKE ? ',"#{user.id}","#{params[:name]}").count
 														%>
 														<% if @existRelation == 0 %>
-														<%= form.submit "Share Note" %>
+														<%= form.submit class:"btn btn-success", :value => "Share Note" %>
 														<% else %>
 														 This user already has this note.
 														<% end %>
