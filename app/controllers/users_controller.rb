@@ -154,7 +154,7 @@ class UsersController < ApplicationController
     
     
   end
-#Muestra las peticiones de amistad pendiente
+#show friendship request whitout answer
   def showFriendsRequest
     @user=User.find_by name: session[:user]
     @friends = FriendshipRequest.where('receiver LIKE ?',"#{@user.id}")
@@ -184,20 +184,14 @@ class UsersController < ApplicationController
   end
 
 def destroy
-    #@user=User.find_by name: session[:user]
-
-    #DELETE NOTES TOO
-
+    #DELETE NOTES 
     @user_notes = UserNote.where('id_user LIKE ?', "#{@user.id}")
     @user_notes.each do |usernote|
       if UserNote.where('id_note LIKE ?', "#{usernote.id_note}").count == 1
         Note.find(usernote.id_note).destroy
       end
-
       usernote.destroy
-
     end
-
 
     #DELETE Collections
     @user_collections = CollectionUser.where('id_user LIKE ?', "#{@user.id}")
@@ -205,22 +199,14 @@ def destroy
       if CollectionUser.where('id_collection LIKE ?', "#{collectionuser.id_collection}").count == 1
         Collection.find(collectionuser.id_collection).destroy
         CollectionNote.where('id_collection LIKE ?', "#{collectionuser.id_collection}").destroy_all
-
       end
-
       collectionuser.destroy
-
     end
 
-
-    ##################### QUEDA HACER LO MISMO CON LAS peticiones de amistad y amigs ###########################
     FriendshipRequest.where('sender LIKE ? OR receiver LIKE ?', "#{@user.id}", "#{@user.id}").destroy_all 
     Friend.where('id_user1 LIKE ? OR id_user2 LIKE ?', "#{@user.id}", "#{@user.id}").destroy_all
 
-
-
     @user.destroy
-    #User.find(params[:id]).destroy
     redirect_to "/logout", :notice => "The user was successfully destroyed."
 
   end

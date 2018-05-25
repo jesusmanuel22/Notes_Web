@@ -139,7 +139,7 @@ class CollectionsController < ApplicationController
   
   def addnote
   	@user = User.find_by name: session[:user]
-	@notes=Array.new
+    @notes=Array.new
 		#@notes = Note.where('note.id LIKE "user_notes".id_note AND "user_notes".id_user == ?', "#{@user.id}")
 		sql = "SELECT 'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.'id' == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}"
 		result = ActiveRecord::Base.connection.execute(sql)

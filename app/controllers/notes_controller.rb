@@ -7,7 +7,6 @@ class NotesController < ApplicationController
     @user=User.find_by name: session[:user]
 	
     @notes=Array.new
-    #@notes = Note.where('note.id LIKE "user_notes".id_note AND "user_notes".id_user == ?', "#{@user.id}")
     sql = "SELECT 'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.'id' == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}"
     result = ActiveRecord::Base.connection.execute(sql)
     result.each do |row|
@@ -18,14 +17,8 @@ class NotesController < ApplicationController
      @note.image = row[3]
      @notes.push(@note)
     end
-    #@result.each do |notes|
-     #@notes=Note.select("'notes'.* FROM 'notes', 'user_notes' WHERE 'notes'.id == 'user_notes'.id_note AND 'user_notes'.id_user == #{@user.id}")
-    #end
-    #@notes = Note.joins(:user_note).where("id_user == #{@user.id}").uniq
-	#@user=User.find_by name: session[:user]
-	#@notes = Note.where('id_user LIKE ?', "#{@user.id}")
-
   end
+
 
   def allnotes
 	@user=User.find_by name: session[:user]
@@ -43,7 +36,6 @@ class NotesController < ApplicationController
         @usersFriends.push(User.find(friend.id_user1))
       end
     end
-	#@notes = Friend.getFriends
   end
   
   def adminshare
