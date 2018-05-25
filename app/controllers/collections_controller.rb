@@ -74,8 +74,7 @@ class CollectionsController < ApplicationController
     @note=params[:id]
 	  @collection=params[:name]
     CollectionNote.where('id_note LIKE ? AND id_collection LIKE ? ', "#{@note}", "#{@collection}").destroy_all
-    redirect_to :collections
-
+    redirect_back(fallback_location: root_path)
   end
 
   # SHOW all collections from user
