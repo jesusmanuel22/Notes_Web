@@ -137,9 +137,9 @@
 											<h4 class="counter text-right m-t-15 text-megna">
 											
 											
-											<%= link_to("/collections/#{params[:name]}/delete/#{note.id}", style:"background:transparent;") do %>
+											<%= link_to("/collections/#{params[:name]}/delete/#{note.id}", style:"background:transparent;") do%>
 												<i class="fa fa-lg fa-minus-square"></i> 
-											<% end %>
+						<% end %>
 											<!--
 											< %= button_to "-", { :action => "destroyNoteFromCollection", :controller =>"collections", :note => note}, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
 											<!--remove_from_collection

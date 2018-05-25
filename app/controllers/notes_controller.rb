@@ -110,7 +110,13 @@ class NotesController < ApplicationController
   
   #Remove note from collection
   def remove_from_collection
-    CollectionNote.where('id_note LIKE ? AND id_collection LIKE ? ', "#{@note.id}", "#{@collection.id}").destroy_all
+ #   CollectionNote.where('id_note LIKE ? AND id_collection LIKE ? ', "#{@note.id}", "#{@collection.id}").destroy_all
+#  redirect_to :collections
+    @note=params[:id]
+    @collection=params[:name]
+    CollectionNote.where('id_note LIKE ? AND id_collection LIKE ? ', "#{@note}", "#{@collection}").destroy_all
+    redirect_to :collections
+
   end
 
 

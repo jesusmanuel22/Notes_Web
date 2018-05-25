@@ -35,6 +35,12 @@ Rails.application.routes.draw do
     end
   end
   post "notes/:name" => 'notes#admin_destroy'
+  #resources :notes do
+   # collection do
+    #get ':name/delete/:id' => "notes#remove_from_collection"
+  #  end
+    
+  #end
 	
   #USER NOTES
   resources :user_notes
@@ -84,6 +90,7 @@ Rails.application.routes.draw do
     collection do
 	  get ':name/delete/:id' => "collections#destroyNoteFromCollection"
     end
+
   end  
  # post "collections/destroyNoteFromCollection"
 

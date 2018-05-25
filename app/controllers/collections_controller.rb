@@ -69,13 +69,13 @@ class CollectionsController < ApplicationController
     end
   end
   
-    #DELETE FRIENDS
+    #DELETE NOTE FROM COLLECTION
   def destroyNoteFromCollection
-      @note=params[:id]
+    @note=params[:id]
 	  @collection=params[:name]
-	  
-	   CollectionNote.where('id_note LIKE ? AND id_collection LIKE ? ', "#{@note}", "#{@collection}").destroy_all
-      redirect_to '/collections'
+    CollectionNote.where('id_note LIKE ? AND id_collection LIKE ? ', "#{@note}", "#{@collection}").destroy_all
+    redirect_to :collections
+
   end
 
   # SHOW all collections from user
@@ -150,7 +150,8 @@ class CollectionsController < ApplicationController
 		 @note.text = row[2]
 		 @note.image = row[3]
 		 @notes.push(@note)
-	end
+    end
+    session[:return_to] = request.referer
   end
   private
     # Use callbacks to share common setup or constraints between actions.
